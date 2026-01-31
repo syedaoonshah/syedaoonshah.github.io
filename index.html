@@ -1,0 +1,1476 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Aoon | AI Researcher &amp; Developer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- ScrollReveal -->
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#1E293B',
+                        accent: '#D4AF37',
+                        gold: '#D4AF37',
+                        goldLight: '#F2E8B3',
+                        dark: '#020617'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .premium-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .premium-text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent 0%, 
+                rgba(212, 175, 55, 0.4) 50%, 
+                transparent 100%
+            );
+            background-size: 200% 100%;
+            background-position: 100% 0;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #020617 0%, #1E293B 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #D4AF37;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: #D4AF37;
+        }
+        
+        .btn-primary {
+            background-color: rgba(212, 175, 55, 0.1);
+            color: #D4AF37;
+            border: 1px solid #D4AF37;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #D4AF37;
+        }
+        
+        .feature-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-card:hover .feature-icon {
+            background: rgba(212, 175, 55, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .transition-section {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .transition-container {
+            position: relative;
+            height: 300vh;
+        }
+        
+        .transition-content {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .transition-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #D4AF37, transparent);
+            z-index: 10;
+        }
+        
+        .transition-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+        }
+        
+        .split-layout {
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        .split-content {
+            width: 50%;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .split-image {
+            width: 50%;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .split-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+        }
+        
+        .dynamic-island-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+            transition: all 0.5s ease;
+        }
+        
+        .dynamic-island {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+        
+        .dynamic-island:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+        
+        .island-text {
+            color: #D4AF37;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .island-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4AF37;
+            transition: all 0.3s ease;
+            margin-left: 0.75rem;
+        }
+        
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 200;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .drawer.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .drawer-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .drawer.active .drawer-backdrop {
+            opacity: 1;
+        }
+        
+        .drawer-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 90vh;
+            background: #0F172A;
+            border-radius: 20px 20px 0 0;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        
+        .drawer.active .drawer-content {
+            transform: translateY(0);
+        }
+        
+        .drawer-header {
+            position: relative;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .drawer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4AF37;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .drawer-close:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .drawer-body {
+            padding: 2rem;
+            height: calc(100% - 120px);
+            overflow-y: auto;
+        }
+        
+        .stats-container {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+        
+        .stats-container:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-showcase {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .project-showcase:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.6s ease;
+        }
+        
+        .project-showcase:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 60%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+        
+        .project-showcase:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #D4AF37;
+        }
+        
+        .project-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tech-tag {
+            background: rgba(212, 175, 55, 0.2);
+            color: #D4AF37;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #D4AF37, rgba(212, 175, 55, 0.1));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #D4AF37;
+            border: 3px solid #0F172A;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        
+        .timeline-date {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-organization {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .contact-info {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+        
+        .contact-info:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-info:hover .contact-icon {
+            background: rgba(212, 175, 55, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .contact-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #D4AF37;
+        }
+        
+        .contact-value {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-value:hover {
+            color: #D4AF37;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4AF37;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.6);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .split-layout {
+                flex-direction: column;
+            }
+            
+            .split-content,
+            .split-image {
+                width: 100%;
+            }
+            
+            .split-image {
+                height: 50vh;
+            }
+            
+            .dynamic-island {
+                min-width: 180px;
+                padding: 0.5rem 1rem;
+            }
+            
+            .island-text {
+                font-size: 0.85rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full bg-transparent backdrop-blur-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold serif-text premium-text" data-text="Syed Aoon">
+                    Syed <span class="text-gold">Aoon</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#research" class="nav-link">Research</a>
+                    <a href="#publications" class="nav-link">Publications</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#education" class="nav-link">Education</a>
+                    <a href="#contact" class="btn-primary px-6 py-2 rounded-full text-sm">Contact</a>
+                </div>
+                
+                <button class="md:hidden text-white text-xl" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-primary z-50 transform translate-x-full transition-transform duration-300 md:hidden" id="mobileMenu">
+        <div class="flex justify-end p-6">
+            <button class="text-white text-2xl" id="closeMenuBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center space-y-6 mt-16">
+            <a href="#about" class="text-white text-xl hover:text-gold transition-colors mobile-nav-link">About</a>
+            <a href="#research" class="text-white text-xl hover:text-gold transition-colors mobile-nav-link">Research</a>
+            <a href="#projects" class="text-white text-xl hover:text-gold transition-colors mobile-nav-link">Projects</a>
+            <a href="#experience" class="text-white text-xl hover:text-gold transition-colors mobile-nav-link">Experience</a>
+            <a href="#contact" class="btn-primary px-8 py-3 rounded-full text-lg mt-4">Contact</a>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero-section flex items-center justify-center">
+        <div class="hero-gradient"></div>
+        <div class="hero-content container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 premium-text" data-text="Syed Aoon">
+                Syed <span class="text-gold">Aoon</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300 leading-relaxed">
+                AI Researcher &amp; Computer Vision Specialist
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <a href="#about" class="btn-primary px-8 py-4 rounded-full font-medium">
+                    Explore Profile
+                </a>
+                <a href="#contact" class="border border-white/20 text-white hover:text-gold hover:border-gold px-8 py-4 rounded-full font-medium transition-all duration-300">
+                    Get in Touch
+                </a>
+            </div>
+            <div class="social-links justify-center">
+                <a href="mailto:syed.m.aoon.shah@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/syedaoon" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/syedaoonshah" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down text-gold mb-2"></i>
+            <span class="text-sm">Scroll to explore</span>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="py-20 bg-gradient-to-b from-primary to-dark">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stats-container text-center">
+                    <div class="stat-number" data-target="8">0</div>
+                    <p class="text-gray-300">Research Projects</p>
+                </div>
+                <div class="stats-container text-center">
+                    <div class="stat-number" data-target="2">0</div>
+                    <p class="text-gray-300">Publications</p>
+                </div>
+                <div class="stats-container text-center">
+                    <div class="stat-number" data-target="15">0</div>
+                    <p class="text-gray-300">Technical Skills</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="py-24 bg-dark" id="about">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="section-title text-3xl md:text-4xl text-white mb-8">About Me</h2>
+                <p class="text-gray-300 mb-6 leading-relaxed text-lg">
+                    I'm a computer science postgraduate at Northwestern Polytechnical University, Xi'an, China, specializing in deep learning and computer vision. With a research focus on robust and illumination-invariant vision systems for safety-critical and medical applications.
+                </p>
+                <p class="text-gray-300 mb-8 leading-relaxed text-lg">
+                    I'm experienced in designing hybrid architectures combining modern deep networks with classical computer vision techniques. Currently working on eye tracking, gaze estimation, and low-light image enhancement, with active interests in WiFi sensing and RF-based vision systems.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="feature-card p-6 rounded-lg">
+                        <div class="feature-icon rounded-full mb-4">
+                            <i class="fas fa-brain text-gold text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gold">Deep Learning</h3>
+                        <p class="text-gray-400 text-sm">Neural networks, CNNs, transformers</p>
+                    </div>
+                    <div class="feature-card p-6 rounded-lg">
+                        <div class="feature-icon rounded-full mb-4">
+                            <i class="fas fa-eye text-gold text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gold">Computer Vision</h3>
+                        <p class="text-gray-400 text-sm">Object detection, image processing</p>
+                    </div>
+                    <div class="feature-card p-6 rounded-lg">
+                        <div class="feature-icon rounded-full mb-4">
+                            <i class="fas fa-code text-gold text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gold">Software Development</h3>
+                        <p class="text-gray-400 text-sm">Python, C++, TensorFlow, PyTorch</p>
+                    </div>
+                    <div class="feature-card p-6 rounded-lg">
+                        <div class="feature-icon rounded-full mb-4">
+                            <i class="fas fa-lightbulb text-gold text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-gold">Innovation</h3>
+                        <p class="text-gray-400 text-sm">Research, problem-solving, creativity</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <!-- Research Section -->
+    <section class="py-24 bg-gradient-to-b from-dark to-primary" id="research">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl text-white inline-block">Research Focus</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="feature-icon rounded-full mb-6">
+                        <i class="fas fa-wifi text-gold text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gold">WiFi Sensing &amp; RF Vision</h3>
+                    <p class="text-gray-300 mb-6">
+                        Exploring radio frequency-based vision systems and WiFi sensing technologies for human activity recognition and environmental perception.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">WiFi Sensing</span>
+                        <span class="tech-tag">RF Vision</span>
+                        <span class="tech-tag">MIMO</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="feature-icon rounded-full mb-6">
+                        <i class="fas fa-eye text-gold text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gold">Eye Tracking &amp; Gaze Estimation</h3>
+                    <p class="text-gray-300 mb-6">
+                        Developing robust eye tracking systems and gaze estimation models using self-supervised learning, with applications in human attention modeling and driver monitoring.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">DINOv2</span>
+                        <span class="tech-tag">MAML</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="feature-icon rounded-full mb-6">
+                        <i class="fas fa-exclamation-triangle text-gold text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gold">Video-based Anomaly Detection</h3>
+                    <p class="text-gray-300 mb-6">
+                        Developing intelligent systems for detecting anomalies in video streams and visual inputs for safety-critical applications.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Video Anomaly Detection</span>
+                        <span class="tech-tag">Deep Learning</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Publications Section -->
+    <section class="py-24 bg-gradient-to-b from-primary to-dark" id="publications">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl text-white inline-block">Publications</h2>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <div class="feature-card p-8 rounded-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-semibold text-gold">Illuminating the Darkness: Deep Learning-Based Review of LLIE Methods</h3>
+                            <span class="bg-red-500/20 text-red-400 px-4 py-1 rounded-full text-sm border border-red-500/30">Under Review</span>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            <strong>Authors:</strong> <span class="text-gold font-semibold">Syed Aoon</span>, Xinbo Zhao et al.
+                        </p>
+                        <p class="text-gray-400 mb-6 italic">
+                            Journal: Engineering Applications of Artificial Intelligence (IF: 8.0), Elsevier, 2025
+                        </p>
+                        <p class="text-gray-300 mb-6">
+                            A comprehensive review of Low-Light Image Enhancement (LLIE) methods using deep learning techniques. This work provides a systematic taxonomy of existing approaches and conducts extensive comparative analysis to identify current challenges and future research directions.
+                        </p>
+                        <div class="mb-6">
+                            <h4 class="text-xl font-semibold mb-3 text-white">Contribution:</h4>
+                            <p class="text-gray-300">
+                                Designed deep learning taxonomy, conducted comparative analysis of LLIE methods, and led manuscript writing
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tech-tag">Literature Review</span>
+                            <span class="tech-tag">LLIE</span>
+                            <span class="tech-tag">Deep Learning</span>
+                            <span class="tech-tag">Image Enhancement</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card p-8 rounded-lg border-2 border-gold/30">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-semibold text-gold">RGB-DINO-Gaze: Label-Efficient Gaze Estimation via Self-Supervised Learning</h3>
+                            <span class="bg-gold/20 text-gold px-4 py-1 rounded-full text-sm border border-gold/30">Master's Thesis</span>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            <strong>Supervisor:</strong> Prof. Xinbo Zhao, Northwestern Polytechnical University
+                        </p>
+                        <p class="text-gray-400 mb-6 italic">
+                            Master's Thesis, Northwestern Polytechnical University, 2025
+                        </p>
+                        <p class="text-gray-300 mb-6">
+                            A novel three-phase semi-supervised framework for gaze estimation that significantly reduces the need for labeled training data while maintaining high accuracy.
+                        </p>
+                        <div class="mb-6">
+                            <h4 class="text-xl font-semibold mb-3 text-white">Key Contributions:</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-300">
+                                <li>Designed novel three-phase semi-supervised framework combining RGB-MEM (Masked Eye Modeling) pretraining, dual self-supervision with consistency regularization, and MAML-based meta-adaptation</li>
+                                <li>Achieved 1.70° mean angular error using only 50% labeled data, outperforming fully supervised baseline (1.79° with 100% labels) by 5.3%</li>
+                                <li>Developed eye-region-aware masking strategy preserving anatomically critical pupil and eyelid regions during unsupervised reconstruction</li>
+                                <li>Implemented DINOv2-based architecture with frozen early layers and lightweight bottleneck adapter (768→64→768) for efficient few-shot user calibration</li>
+                            </ul>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="https://github.com/syedaoonshah/RGB-DINO-Gaze" target="_blank" class="btn-primary px-6 py-2 rounded-full text-sm flex items-center gap-2">
+                                <i class="fab fa-github"></i> GitHub Repository
+                            </a>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="tech-tag">Self-Supervised Learning</span>
+                                <span class="tech-tag">Gaze Estimation</span>
+                                <span class="tech-tag">MAML</span>
+                                <span class="tech-tag">PyTorch</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Showcase -->
+    <section class="py-24 bg-gradient-to-b from-dark to-primary" id="projects">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl text-white inline-block">Projects</h2>
+            </div>
+            
+            <div class="space-y-8">
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-semibold text-gold">Deep Learning-Based Robust Eye Tracking</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="tech-tag">2025</span>
+                            <a href="https://github.com/syedaoonshah/SmartEyeTracking" target="_blank" class="bg-gold/20 text-gold px-4 py-1 rounded-full text-sm border border-gold/30 hover:bg-gold/30 transition-all duration-300">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">YOLOv8</span>
+                        <span class="tech-tag">U-Net</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        A comprehensive eye tracking system designed to maintain robust performance in challenging environments, combining state-of-the-art deep learning models for glare removal and precise feature tracking.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3 text-white">Key Achievements:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li>Built dual-model pipeline combining U-Net-based glare removal and YOLOv8n for robust eye feature tracking</li>
+                            <li>Designed custom loss functions to suppress glare while preserving critical pupillary features</li>
+                            <li>Used LAB-based normalization with z-score brightness and contrast correction for lighting consistency</li>
+                            <li>Research implementation aligned with Master's thesis on robust eye tracking</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-semibold text-gold">Hybrid CNN-Based Eye Tracking Pipeline</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="tech-tag">2025</span>
+                            <a href="https://github.com/syedaoonshah/Hybrid-CNN-Based-Eye-Tracking" target="_blank" class="bg-gold/20 text-gold px-4 py-1 rounded-full text-sm border border-gold/30 hover:bg-gold/30 transition-all duration-300">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">CLAHE</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        An advanced eye tracking system that combines the strengths of deep learning with classical computer vision techniques to achieve exceptional accuracy and robustness across varied conditions.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3 text-white">Key Achievements:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li>Developed hybrid system combining PyTorch CNNs and autoencoders with classical CV fallbacks, achieving 95%+ accuracy</li>
+                            <li>Designed adaptive brightness normalization using LAB z-score standardization with confidence-guided parameter search</li>
+                            <li>Implemented unified training framework with dual optimizers supporting joint detection and self-supervised training</li>
+                            <li>Built real-time reflection removal module using morphological processing, inpainting, and CLAHE</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-semibold text-gold">Tomato Leaf Disease Detection: Deep Learning Web App</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="tech-tag">2025</span>
+                            <a href="https://github.com/syedaoonshah/Tomato-Disease-Detection-EfficientNet" target="_blank" class="bg-gold/20 text-gold px-4 py-1 rounded-full text-sm border border-gold/30 hover:bg-gold/30 transition-all duration-300">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Gradio</span>
+                        <span class="tech-tag">HuggingFace</span>
+                        <span class="tech-tag">EfficientNetB0</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        A production-ready web application that leverages deep learning to accurately detect and classify tomato plant diseases, helping farmers identify issues early and reduce crop losses.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3 text-white">Key Achievements:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li>Built and deployed production AI web app using EfficientNetB0, achieving 98% test accuracy</li>
+                            <li>Implemented end-to-end ML pipeline, training on 11K images with transfer learning and progressive fine-tuning</li>
+                            <li>Developed mobile-friendly web interface with real-time camera input and confidence scores using Gradio</li>
+                            <li>Deployed scalable inference service on Hugging Face Spaces with &lt;2s latency</li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <a href="https://huggingface.co/spaces/syedaoon/tomato-disease-detector" target="_blank" class="btn-primary px-6 py-2 rounded-full text-sm flex items-center gap-2">
+                            <i class="fas fa-play-circle"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-semibold text-gold">Advanced Video Object Detection Framework</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="tech-tag">2025</span>
+                            <a href="https://github.com/syedaoonshah/STCN-YoloV8-Object-detection" target="_blank" class="bg-gold/20 text-gold px-4 py-1 rounded-full text-sm border border-gold/30 hover:bg-gold/30 transition-all duration-300">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag">STCN</span>
+                        <span class="tech-tag">YOLOv8</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Video Processing</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        A sophisticated framework for object detection in video sequences that handles challenging scenarios including fast motion and object occlusion.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3 text-white">Key Achievements:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li>Developed real-time object detection pipeline combining STCN with YOLOv8 for challenging video scenarios</li>
+                            <li>Optimized multi-stage deep learning models for improved performance on fast-moving and occluded objects</li>
+                            <li>Designed scalable, modular architecture adaptable to diverse datasets and deployment environments</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-semibold text-gold">Other Projects</h3>
+                        <span class="tech-tag">2021-2024</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-tag">Deep Learning</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gold">Low-Light Image Quality Enhancement (2024)</h4>
+                            <p class="text-gray-300 text-sm mb-4">
+                                Deep learning approaches for noise reduction and visibility improvement in low-light images
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gold">Face Recognition System (2023)</h4>
+                            <p class="text-gray-300 text-sm mb-4">
+                                CNN-based system for accurate face identification under varied lighting and pose conditions
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gold">Sign Language Recognition (2022)</h4>
+                            <p class="text-gray-300 text-sm mb-4">
+                                Real-time translation system for sign language to improve accessibility
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gold">Object Detection System (2021)</h4>
+                            <p class="text-gray-300 text-sm mb-4">
+                                Comprehensive solution for automation and analysis in computer vision tasks
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    
+    <!-- Contact Section -->
+    <section class="py-24 bg-gradient-to-b from-primary to-dark" id="contact">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl text-white inline-block">Contact Me</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="contact-info text-center">
+                    <div class="contact-icon mx-auto">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <h3 class="contact-title">Email</h3>
+                    <a href="mailto:syed.m.aoon.shah@gmail.com" class="contact-value">
+                        syed.m.aoon.shah@gmail.com
+                    </a>
+                </div>
+                
+                <div class="contact-info text-center">
+                    <div class="contact-icon mx-auto">
+                        <i class="fas fa-phone text-xl"></i>
+                    </div>
+                    <h3 class="contact-title">Phone</h3>
+                    <a href="tel:+8615529532160" class="contact-value">
+                        +86 15529532160
+                    </a>
+                </div>
+                
+                <div class="contact-info text-center">
+                    <div class="contact-icon mx-auto">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </div>
+                    <h3 class="contact-title">LinkedIn</h3>
+                    <a href="https://linkedin.com/in/syedaoon" target="_blank" class="contact-value">
+                        linkedin.com/in/syedaoon
+                    </a>
+                </div>
+                
+                <div class="contact-info text-center">
+                    <div class="contact-icon mx-auto">
+                        <i class="fab fa-github text-xl"></i>
+                    </div>
+                    <h3 class="contact-title">GitHub</h3>
+                    <a href="https://github.com/syedaoonshah" target="_blank" class="contact-value">
+                        github.com/syedaoonshah
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <button class="btn-primary px-10 py-4 rounded-full font-medium text-lg" onclick="openDrawer('contactDrawer')">
+                    Send Message
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 bg-dark border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold serif-text">
+                        Syed <span class="text-gold">Aoon</span>
+                    </a>
+                    <p class="text-gray-400 mt-2">AI Researcher &amp; Computer Vision Specialist</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="mailto:syed.m.aoon.shah@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/syedaoon" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/syedaoonshah" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2024 Syed Aoon. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Dynamic Island -->
+    <div class="dynamic-island-container" id="dynamicIslandContainer">
+        <div class="dynamic-island" id="dynamicIsland">
+            <span class="island-text" id="islandText">Explore Profile</span>
+            <div class="island-icon">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <!-- Contact Drawer -->
+    <div class="drawer" id="contactDrawer">
+        <div class="drawer-backdrop" onclick="closeDrawer('contactDrawer')"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2 class="text-2xl font-bold text-gold">Send Message</h2>
+                <button class="drawer-close" onclick="closeDrawer('contactDrawer')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="drawer-body">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Name</label>
+                        <input type="text" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Email</label>
+                        <input type="email" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Subject</label>
+                        <input type="text" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Message</label>
+                        <textarea rows="6" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-3 rounded-lg font-medium">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+        
+        // Dynamic Island
+        const islandContainer = document.getElementById('dynamicIslandContainer');
+        const islandText = document.getElementById('islandText');
+        const island = document.getElementById('dynamicIsland');
+        
+        function updateIsland(newText) {
+            islandText.style.opacity = '0';
+            islandText.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                islandText.textContent = newText;
+                islandText.style.opacity = '1';
+                islandText.style.transform = 'scale(1)';
+                
+                const baseWidth = 200;
+                const textWidth = islandText.offsetWidth;
+                island.style.width = `${Math.max(baseWidth, textWidth + 100)}px`;
+            }, 300);
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all hidden elements and force initial check
+        const hiddenElements = document.querySelectorAll('.hidden');
+        
+        // Add a small delay to ensure DOM is fully loaded
+        setTimeout(() => {
+            hiddenElements.forEach(el => {
+                observer.observe(el);
+                
+                // Force immediate visibility check for elements that might already be in view
+                const rect = el.getBoundingClientRect();
+                const isVisible = (
+                    rect.top < window.innerHeight - 50 &&
+                    rect.bottom > -100 &&
+                    rect.left < window.innerWidth &&
+                    rect.right > 0
+                );
+                
+                if (isVisible) {
+                    const delay = el.dataset.delay || 0;
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, delay);
+                }
+            });
+            
+            // Additional check for timeline items specifically
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 200); // Stagger the animation
+            });
+        }, 500);
+        
+        // Counter animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const duration = 2000;
+            const interval = duration / 50;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, interval);
+        }
+        
+        // Start counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.dataset.target);
+                        animateCounter(counter, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.stats-container').parentElement.parentElement;
+        statsObserver.observe(statsSection);
+        
+        // Drawer functions
+        function openDrawer(id) {
+            const drawer = document.getElementById(id);
+            drawer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeDrawer(id) {
+            const drawer = document.getElementById(id);
+            drawer.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-primary/90');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-primary/90');
+                navbar.classList.add('bg-transparent');
+            }
+            
+            // Update dynamic island based on scroll position
+            const sections = ['about', 'research', 'projects', 'experience', 'contact'];
+            const currentSection = sections.find(section => {
+                const el = document.getElementById(section);
+                const rect = el.getBoundingClientRect();
+                return rect.top <= 100 && rect.bottom >= 100;
+            });
+            
+            if (currentSection) {
+                const titles = {
+                    'about': 'About Me',
+                    'research': 'Research Focus',
+                    'projects': 'Featured Projects',
+                    'experience': 'Experience',
+                    'contact': 'Get in Touch'
+                };
+                updateIsland(titles[currentSection]);
+            }
+        });
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set premium text data attributes
+            document.querySelectorAll('.premium-text').forEach(el => {
+                el.setAttribute('data-text', el.textContent);
+            });
+            
+            // Show dynamic island after page load
+            setTimeout(() => {
+                islandContainer.style.opacity = '1';
+            }, 1000);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body></html>
