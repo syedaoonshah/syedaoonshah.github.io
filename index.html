@@ -1725,22 +1725,39 @@
             }
             
             // Update dynamic island based on scroll position
-            const sections = ['about', 'research', 'projects', 'experience', 'contact'];
-            const currentSection = sections.find(section => {
+            const sections = ['about', 'research', 'education', 'publications', 'projects', 'skills', 'certifications', 'awards', 'languages', 'contact'];
+            let currentSection = null;
+            
+            // Find the section that is currently in view
+            for (const section of sections) {
                 const el = document.getElementById(section);
-                const rect = el.getBoundingClientRect();
-                return rect.top <= 100 && rect.bottom >= 100;
-            });
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    // Consider a section active if it occupies at least 30% of the viewport
+                    if (rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3) {
+                        currentSection = section;
+                        break;
+                    }
+                }
+            }
             
             if (currentSection) {
                 const titles = {
                     'about': 'About Me',
                     'research': 'Research Focus',
+                    'education': 'Education',
+                    'publications': 'Publications',
                     'projects': 'Featured Projects',
-                    'experience': 'Experience',
+                    'skills': 'Technical Skills',
+                    'certifications': 'Certifications',
+                    'awards': 'Awards & Honors',
+                    'languages': 'Languages',
                     'contact': 'Get in Touch'
                 };
-                updateIsland(titles[currentSection]);
+                
+                if (titles[currentSection]) {
+                    updateIsland(titles[currentSection]);
+                }
             }
         });
         
